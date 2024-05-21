@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #1a1a2e;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.title {
+    text-align: center;
+    font-size: 36px;
+    color: #e94560;
+    font-weight: bold;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease;
+}
+
+.container {
+    background-color: #16213e;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    animation: fadeInUp 1s ease;
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.password-length {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.label-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+#length {
+    height: 30px;
+    overflow-y: auto;
+    font-size: 16px;
+    width: 120px; /* Adjust width as needed */
+}
+
+.label-container label {
+    margin-right: 20px; /* Adjust margin as needed */
+}
+
+.label-text {
+    flex: 1; /* Adjust flex to distribute space */
+}
+
+label,
+.options p {
+    margin: 15px 0;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button.action-button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    background-color: #e94560;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+button.action-button:hover {
+    background-color: #ff5c7a;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(233, 69, 96, 0.5);
+}
+
+.password {
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #0f3460;
+    border-radius: 5px;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    width: calc(100% - 20px);
+}
+
+.show-hide-password-button {
+    margin-left: 10px;
+    padding: 12px 20px;
+    background-color: #e94560;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.show-hide-password-button:hover {
+    background-color: #ff5c7a;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(233, 69, 96, 0.5);
+}
+
+.strength-meter {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

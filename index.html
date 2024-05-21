@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sala7's Password Generator</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    /* Style for the dropdown list */
+    #length {
+      height: 30px;
+      overflow-y: auto;
+      font-size: 16px;
+      width: 100px; /* Adjust width as needed */
+    }
+
+    .show-hide-password-button {
+      margin-left: 10px; /* Add margin for spacing */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="title">
+    Sala7's Password Generator
+  </div>
+  <div class="container">
+    <div class="password-length">
+        <div class="label-container">
+            <label for="length">Select the password length:</label>
+            <select id="length"></select>
+        </div>
+    </div>
+    
+
+    <div class="options">
+      <p>Include symbols? <input type="checkbox" id="symbols"></p>
+      <p>Include numbers? <input type="checkbox" id="numbers"></p>
+      <p>Include uppercase letters? <input type="checkbox" id="uppercase"></p>
+      <p>Custom character set: <input type="text" id="customSet" placeholder="Enter custom characters"></p>
+    </div>
+
+    <button class="action-button" onclick="generatePassword()">Generate Password</button>
+
+    <div class="password-container">
+      <input type="password" id="password" class="password">
+      <button class="action-button" onclick="copyToClipboard()">Copy Password</button>
+      <button class="action-button show-hide-password-button" onclick="togglePassword()">Show/Hide Password</button>
+    </div>
+    <div class="strength-meter">Password Strength: <span id="strength" style="color: red;">Weak</span></div>
+  </div>
+
+  <script>
+    // Populate the dropdown with options from 1 to 50
+    const lengthSelect = document.getElementById('length');
+    for (let i = 1; i <= 50; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = i;
+      lengthSelect.appendChild(option);
+    }
+
+    function generatePassword() {
+      const length = document.getElementById('length').value;
+      const includeSymbols = document.getElementById('symbols').checked;
+      const includeNumbers = document.getElementById('numbers').checked;
+      const includeUppercase = document.getElementById('uppercase').checked;
+      const customSet = document.getElementById('customSet').value;
+
+      const symbols = '!@#$%^&*()_+{}[]:;\'<>?,./';
+      const numbers = '0123456789';
+      const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+      const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+      let characters = lowercase;
+      if (includeSymbols) characters += symbols;
+      if (includeNumbers) characters += numbers;
+      if (includeUppercase) characters += uppercase;
+      if (customSet) characters = customSet; // Use custom set if provided
+
+      let password = '';
+      for (let i = 0; i < length; i++) {
+        password += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+
+      document.getElementById('password').value = password;
+      updateStrengthMeter(password);
+    }
+
+    function copyToClipboard() {
+      const passwordField = document.getElementById('password');
+      passwordField.select();
+      document.execCommand('copy');
+    }
+
+    function togglePassword() {
+      const passwordField = document.getElementById('password');
+      const toggle = document.getElementById('togglePassword');
+      const showHideButton = document.querySelector('.show-hide-password-button');
+      passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+      showHideButton.textContent = passwordField.type === 'password' ? 'Show Password' : 'Hide Password';
+    }
+
+    function updateStrengthMeter(password) {
+      const strengthSpan = document.getElementById('strength');
+      let strength = 0;
+      if (/[a-z]/.test(password)) strength++;
+      if (/[A-Z]/.test(password)) strength++;
+      if (/[0-9]/.test(password)) strength++;
+      if (/[^a-zA-Z0-9]/.test(password)) strength++;
+      if (password.length >= 8) strength++;
+
+      if (strength <= 2) {
+        strengthSpan.textContent = 'Weak';
+        strengthSpan.style.color = 'red';
+      } else if (strength <= 4) {
+        strengthSpan.textContent = 'Moderate';
+        strengthSpan.style.color = 'orange';
+      } else {
+        strengthSpan.textContent = 'Strong';
+        strengthSpan.style.color = 'green';
+      }
+    }
+  </script>
+</body>
+
+</html>
